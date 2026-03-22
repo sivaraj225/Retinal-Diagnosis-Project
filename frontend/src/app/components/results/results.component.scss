@@ -1,0 +1,595 @@
+.results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 620px;
+    width: 1250px;
+    margin: auto;
+}
+
+.images-section-full {
+    width: 100%;
+    height: 100%;
+}
+
+
+.custom-card-title{
+    font-size: 1.6rem;
+}
+.comparison-card {
+    padding: 24px;
+    gap: 28px;
+    overflow: hidden;
+    height: 100%;
+
+    .custom-card-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        max-height: 620px;
+    }
+}
+
+.scan-analysis-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    height: 100%;
+
+    >* {
+        min-width: 0;
+        
+    }
+
+    @media (max-width: 960px) {
+        flex-direction: column;
+    }
+}
+
+.custom-card-actions {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+}
+
+
+.panel-label {  
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: hsl(var(--hsl-text-muted));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: 400px;
+}
+
+/* Image Panel */
+.scan-image-panel {
+    display: flex;
+    flex-direction: column;
+    width: 38.5%;
+
+    .image-frame {
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        background: black;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+        max-height: 450px;
+
+        .retinal-image {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            object-fit: contain;
+            transition: filter 0.3s ease;
+        }
+    }
+
+    .filter-controls {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 6px;
+        align-items: center;
+        width: 100%;
+
+        .filter-label {
+            font-size: 0.8rem;
+            color: hsl(var(--hsl-text-muted));
+            margin-right: 4px;
+            width: 100%;
+        }
+
+        button {
+            height: 28px;
+            line-height: 26px;
+            font-size: 0.75rem;
+            padding: 0 12px;
+            border-radius: 14px;
+            border-color: rgba(255, 255, 255, 0.2);
+
+            &.active-filter {
+                background: hsla(var(--hsl-primary), 0.2);
+                border-color: hsl(var(--hsl-primary));
+                color: hsl(var(--hsl-primary));
+            }
+        }
+    }
+}
+
+.filter-btn{
+    width: 120px !important;
+}
+
+.filter-label{
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: hsl(var(--hsl-text-muted));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: 100%;
+}
+
+.filter-controls{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+    align-items: start;
+    width: 100%;
+}
+
+/* Top Prediction Panel */
+.top-prediction-panel {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    justify-content: center;
+    text-align: center;
+}
+
+.top-disease-banner {
+    background: linear-gradient(135deg, hsla(var(--hsl-success), 0.15) 0%, hsla(var(--hsl-success), 0.05) 100%);
+    border: 1px solid hsla(var(--hsl-success), 0.3);
+    border-radius: 16px;
+    padding: 12px;
+    text-align: center;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: hsl(var(--hsl-success));
+    }
+
+    .trophy-icon {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+    }
+
+    .top-disease-name {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: hsl(var(--hsl-success));
+    }
+
+    .top-disease-pct {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    .top-disease-level {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.high {
+            background: hsl(var(--hsl-danger));
+            color: #fff;
+        }
+
+        &.moderate {
+            background: hsl(var(--hsl-warning));
+            color: #000;
+        }
+
+        &.low {
+            background: hsl(var(--hsl-success));
+            color: #fff;
+        }
+    }
+
+    .top-disease-desc {
+        font-size: 0.95rem;
+        color: hsl(var(--hsl-text-muted));
+        line-height: 1.4;
+        margin: 0;
+    }
+}
+
+.risk-container1{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-height: 170px;
+}
+
+.risk-container2{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 70%;
+}
+
+.patient-info-mini {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 16px;
+
+    .patient-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+        gap:8px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .pi-label {
+            color: hsl(var(--hsl-text-muted));
+        }
+
+        .pi-value {
+            font-weight: 600;
+            color: hsl(var(--hsl-text-main));
+        }
+    }
+}
+
+.risk-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.download-btn{
+    width: 170px;
+    height: 30px;
+    font-size: 0.8rem;
+}
+
+.analysis-section {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    .risks-card {
+        flex: 2;
+        min-width: 300px;
+    }
+
+    /* Explanation card usually sits next to risks or below depending on width */
+    .explanation-card {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    @media (max-width: 960px) {
+        flex-direction: column;
+
+        >* {
+            width: 100%;
+        }
+    }
+}
+
+.risk-list-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 16px;
+}
+
+.risk-div-container{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+}
+
+.risk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.risk-item {
+    .risk-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+
+        .risk-name {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .risk-score {
+            font-weight: 700;
+        }
+
+        .risk-score.high {
+            color: hsl(var(--hsl-danger));
+        }
+
+        .risk-score.moderate {
+            color: hsl(var(--hsl-warning));
+        }
+
+        .risk-score.low {
+            color: hsl(var(--hsl-text-main));
+        }
+    }
+
+    .risk-level {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.75rem;
+        text-align: right;
+        opacity: 0.9;
+
+        &.high {
+            color: hsl(var(--hsl-danger));
+        }
+
+        &.moderate {
+            color: hsl(var(--hsl-warning));
+        }
+
+        &.low {
+            color: hsl(var(--hsl-success));
+        }
+    }
+}
+
+
+/* Probability Graph */
+.probability-graph-container {
+    padding: 24px 0;
+    margin-bottom: 24px;
+    height: 200px;
+}
+
+.graph-bars {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 100%;
+    gap: 16px;
+    padding-bottom: 24px;
+    /* Space for labels */
+}
+
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    flex: 1;
+    max-width: 60px;
+    position: relative;
+
+    .bar-wrapper {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 8px 8px 0 0;
+    }
+
+    .bar-fill {
+        width: 100%;
+        border-radius: 4px 4px 0 0;
+        transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        min-height: 4px;
+
+        &.high {
+            background: hsl(var(--hsl-danger));
+            box-shadow: 0 0 15px hsla(var(--hsl-danger), 0.4);
+        }
+
+        &.moderate {
+            background: hsl(var(--hsl-warning));
+            box-shadow: 0 0 15px hsla(var(--hsl-warning), 0.4);
+        }
+
+        &.low {
+            background: hsl(var(--hsl-success));
+            box-shadow: 0 0 15px hsla(var(--hsl-success), 0.4);
+        }
+
+        .bar-tooltip {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        &:hover .bar-tooltip {
+            opacity: 1;
+        }
+    }
+
+    .bar-label {
+        position: absolute;
+        bottom: -25px;
+        font-size: 0.7rem;
+        color: hsl(var(--hsl-text-muted));
+        text-align: center;
+        width: 120%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 24px 0;
+}
+
+/* Explainable AI Styles (Updated) */
+.shap-container {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.shap-legend {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    color: hsl(var(--hsl-text-muted));
+
+    .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 6px;
+
+        &.positive {
+            background-color: hsl(var(--hsl-accent));
+        }
+
+        &.negative {
+            background-color: hsl(var(--hsl-primary));
+        }
+    }
+}
+
+.shap-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .feature-label {
+        width: 140px;
+        font-size: 0.9rem;
+        color: hsl(var(--hsl-text-main));
+        text-align: right;
+        padding-right: 16px;
+    }
+
+    .bar-container {
+        flex: 1;
+        position: relative;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+
+        .center-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1;
+        }
+
+        .shap-bar {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            border-radius: 2px;
+            transition: width 1s ease-out;
+
+            &.positive {
+                background-color: hsl(var(--hsl-accent));
+            }
+
+            &.negative {
+                background-color: hsl(var(--hsl-primary));
+            }
+        }
+
+        .value-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: hsl(var(--hsl-text-main));
+
+            &.right {
+                right: 12px;
+            }
+
+            &.left {
+                left: 12px;
+            }
+        }
+    }
+}
+
+.summary-text {
+    color: hsl(var(--hsl-text-main));
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 16px;
+}
+
+.trend-card,
+.explanation-card {
+    width: 100%;
+}
+
+.value-risk {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

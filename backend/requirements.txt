@@ -1,0 +1,9 @@
+flask==3.0.3
+flask-cors==4.0.1
+tensorflow
+pillow==10.4.0
+numpy
+python-dotenv
+requests
+reportlab==4.2.2
+svglib

@@ -1,0 +1,55 @@
+SOFTWARE REQUIREMENTS SPECIFICATION: RETINAL DIAGNOSTIC APPLICATION
+
+1. PROJECT OVERVIEW
+The Retinal Diagnostic Application is a specialized medical software platform designed to assist ophthalmologists and clinicians in identifying retinal diseases from eye scan images. The system leverages AI/ML models to provide diagnostic insights and offers a suite of clinical visualization tools.
+
+2. TARGET AUDIENCE
+- Ophthalmologists
+- Medical Practitioners
+- Clinical Diagnostic Staff
+
+3. FUNCTIONAL REQUIREMENTS
+   3.1 User Authentication
+       - Secure Login and Signup for medical practitioners.
+       - Auth Guard protection for sensitive diagnostic routes.
+   3.2 Patient Management
+       - Capturing patient metadata (ID, Name, DOB, Gender) during scan upload.
+       - Maintaining a comprehensive patient diagnostic history.
+   3.3 Diagnostic Scan Processing
+       - High-fidelity retinal scan image upload via drag-and-drop or file selection.
+       - Asynchronous AI-based analysis of uploaded scans.
+       - Disease detection (e.g., Diabetic Retinopathy, Glaucoma, MD).
+   3.4 Clinical Visualization Tools
+       - Result visualization with heatmaps and diagnostic markers.
+       - Clinical image filters:
+         * Red-Free (to highlight vasculature)
+         * Invert (to enhance structural contrast)
+         * Contrast Adjustment
+   3.5 Dashboard & Reporting
+       - Overview of diagnostic metrics and recent activities.
+       - Ability to export results to PDF format.
+
+4. NON-FUNCTIONAL REQUIREMENTS
+   4.1 User Experience (UX)
+       - Premium, dark-mode-first aesthetic.
+       - Responsive layout using Angular Material.
+       - Intuitive medical-grade interface.
+   4.2 Performance
+       - Optimized image processing for fast feedback.
+       - Efficient handling of high-resolution retinal images.
+   4.3 Security & Privacy
+       - Secure handling of Patient Health Information (PHI).
+       - Backend-level validation of uploaded files.
+
+5. TECHNICAL ARCHITECTURE (CURRENT STACK)
+   - Frontend: Angular 17
+   - UI Library: Angular Material
+   - Backend: Python (FastAPI/Flask implied)
+   - Visualization: Chart.js, ng2-charts
+   - Export: jspdf, html2canvas
+   - Communication: RESTful API (HTTP Client)
+
+6. FUTURE CONSIDERATIONS
+   - Integration with Hospital Management Systems (HMS).
+   - Real-time collaborative diagnosis features.
+   - Enhanced ML model training module within the UI.

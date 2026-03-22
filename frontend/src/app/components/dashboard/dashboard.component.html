@@ -1,0 +1,102 @@
+<div class="dashboard-container">
+    <div class="stats-grid">
+        @for (stat of stats; track stat.title) {
+        <div class="custom-card stat-card glass-panel">
+            <div class="stat-icon" [style.background-color]="stat.color">
+                <mat-icon>{{stat.icon}}</mat-icon>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value">{{stat.value}}</div>
+                <div class="stat-title">{{stat.title}}</div>
+            </div>
+        </div>
+        }
+    </div>
+
+    <div class="content-grid">
+        <!-- Left Column: Recent Scans -->
+        <div class="custom-card recent-scans glass-panel">
+            <div class="custom-card-header">
+                <div class="custom-card-title">Weekly Diagnostics</div>
+                <div class="spacer"></div>
+            </div>
+            <div class="custom-card-content">
+                <div class="table-container">
+                    <table mat-table [dataSource]="recentScans" class="scans-table">
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Patient Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+
+                        <!-- Condition Column -->
+                        <ng-container matColumnDef="condition">
+                            <th mat-header-cell *matHeaderCellDef> Diagnosis </th>
+                            <td mat-cell *matCellDef="let element"> {{element.condition}} </td>
+                        </ng-container>
+
+                        <!-- Date Column -->
+                        <ng-container matColumnDef="date">
+                            <th mat-header-cell *matHeaderCellDef> Date </th>
+                            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                        </ng-container>
+
+                        <!-- Action Column -->
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" color="primary">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item (click)="viewReport(element)">
+                                        <mat-icon>visibility</mat-icon>
+                                        <span>View Report</span>
+                                    </button>
+                                </mat-menu>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
+                <mat-paginator [pageSize]="5" hidePageSize showFirstLastButtons
+                    class="compact-paginator"></mat-paginator>
+
+            </div>
+        </div>
+
+        <!-- Right Column: Charts -->
+        <div class="charts-column">
+            <!-- Disease Distribution Chart -->
+            <div class="custom-card chart-card glass-panel">
+                <div class="custom-card-header">
+                    <div class="custom-card-title">Disease Distribution</div>
+                </div>
+                <div class="custom-card-content chart-container">
+                    <canvas baseChart [datasets]="pieChartDatasets" [labels]="pieChartLabels"
+                        [options]="pieChartOptions" [legend]="true" [type]="'doughnut'">
+                    </canvas>
+                </div>
+            </div>
+
+            <!-- Daily Activity Chart -->
+            <div class="custom-card chart-card glass-panel">
+                <div class="custom-card-header">
+                    <div class="custom-card-title">Daily Scan Activity</div>
+                </div>
+                <div class="custom-card-content chart-container">
+                    <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="'line'">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

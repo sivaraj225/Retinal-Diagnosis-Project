@@ -1,0 +1,59 @@
+<div class="settings-container">
+    <div class="settings-header">
+        <h1>Settings</h1>
+        <p>Manage your application preferences and account settings</p>
+    </div>
+
+    <div class="settings-grid">
+        <!-- Profile Settings -->
+        <div class="custom-card profile-card">
+            <div class="custom-card-header">
+                <div class="card-icon">
+                    <mat-icon>person</mat-icon>
+                </div>
+                <div class="custom-card-title">Profile & Account</div>
+            </div>
+            <div class="custom-card-content">
+                <div class="profile-layout">
+                    <div class="avatar-section">
+                        <div class="avatar-circle">
+                            <img [src]="'https://ui-avatars.com/api/?name=' + userProfile.name + '&background=0D8ABC&color=fff&size=128'"
+                                alt="Avatar">
+                            <button mat-mini-fab color="primary" class="edit-btn">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <div class="form-row">
+                            <div class="custom-form-field full-width">
+                                <label>Full Name</label>
+                                <div class="custom-input-group">
+                                    <input class="custom-input" [(ngModel)]="userProfile.name" placeholder="Full Name">
+                                </div>
+                            </div>
+                            <div class="custom-form-field full-width">
+                                <label>Role</label>
+                                <div class="custom-input-group">
+                                    <input class="custom-input" [(ngModel)]="userProfile.role" placeholder="Role">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-form-field full-width">
+                            <label>Email Address</label>
+                            <div class="custom-input-group">
+                                <input class="custom-input" [(ngModel)]="userProfile.email" placeholder="Email Address">
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button mat-stroked-button>Change Password</button>
+                            <button mat-raised-button color="primary" (click)="updateProfile()">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

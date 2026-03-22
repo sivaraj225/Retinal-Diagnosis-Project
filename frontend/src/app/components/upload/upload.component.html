@@ -1,0 +1,109 @@
+<div class="upload-container">
+    <div class="split-layout">
+        <!-- Left Column: Upload Scan -->
+        <div class="custom-card upload-card section-left">
+            <div class="custom-card-header">
+                <div class="custom-card-title">Upload Retinal Image</div>
+            </div>
+            <div class="custom-card-content upload-content">
+                <div class="drop-zone" [class.dragging]="isDragging" (dragover)="onDragOver($event)"
+                    (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+
+                    @if (!previewUrl) {
+                    <div class="upload-placeholder">
+                        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+                        <h3>Drag & Drop Retina Scan Image</h3>
+                        <p>Supported: JPG, PNG, TIFF</p>
+                        <button mat-flat-button color="primary" (click)="fileInput.click()">
+                            Browse
+                        </button>
+                        <input #fileInput type="file" hidden (change)="onFileSelected($event)" accept="image/*">
+                    </div>
+                    } @else {
+                    <div class="preview-container">
+                        <img [src]="previewUrl" alt="Retinal Scan Preview" class="preview-image">
+                        <button mat-icon-button class="remove-btn"
+                            (click)="previewUrl = null; selectedFile = null; analysisComplete = false; analysisResult = null">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                    }
+                </div>
+
+                @if (isUploading) {
+                <div class="progress-section">
+                    <p>Analyzing scan with AI model...</p>
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+                }
+
+                @if (uploadError) {
+                <div class="error-banner">
+                    <mat-icon>error_outline</mat-icon>
+                    <span>{{ uploadError }}</span>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Right Column: Patient Session Initialization -->
+        <div class="custom-card form-card section-right">
+            <div class="custom-card-header">
+                <div class="header-row">
+                    <div class="custom-card-title">Patient Session Initialization</div>
+                    <!-- Cloud icon removed as requested -->
+                </div>
+            </div>
+            <div class="custom-card-content">
+                <div class="form-grid">
+                    <div class="custom-form-field full-width">
+                        <label>Patient ID (Auto-generated)</label>
+                        <div class="custom-input-group">
+                            <input class="custom-input" [(ngModel)]="patientId" readonly placeholder="Patient ID">
+                        </div>
+                    </div>
+
+                    <div class="custom-form-field full-width">
+                        <label>Name</label>
+                        <div class="custom-input-group">
+                            <input class="custom-input" [(ngModel)]="patientName" placeholder="Anonymous #####">
+                        </div>
+                    </div>
+
+                    <div class="row-2-col">
+                        <div class="custom-form-field">
+                            <label>Age</label>
+                            <div class="custom-input-group">
+                                <input class="custom-input" type="number" [(ngModel)]="age" placeholder="Age">
+                            </div>
+                        </div>
+
+                        <div class="custom-form-field">
+                            <label>Gender</label>
+                            <div class="custom-input-group">
+                                <select class="custom-select" [(ngModel)]="gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Analyze Button moved/emphasized here if needed, but keeping in actions is standard.
+                         I will make it full width in the actions if that helps visibility? 
+                         Or maybe the user wants it INSIDE the form? 
+                         I'll leave it in actions but remove the cloud icon. -->
+                </div>
+            </div>
+            <div class="custom-card-actions">
+                <button mat-button color="warn">Clear</button>
+                <button mat-raised-button class="analyze-btn" (click)="handleAnalyzeClick()"
+                    [disabled]="!selectedFile || isUploading">
+                    {{ analysisComplete ? 'Result' : 'Analyze' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,624 @@
+/* Global Styles - Premium Dark Mode Medical Theme */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+  --font-primary: 'Outfit', sans-serif;
+
+  /* Palette - Deep Midnight Premium */
+  --hsl-bg-dark: 230, 35%, 7%;
+  /* Almost black blue */
+  --hsl-bg-card: 230, 25%, 14%;
+  /* Dark Slate Blue */
+  --hsl-bg-surface: 230, 25%, 18%;
+
+  --hsl-primary: 190, 100%, 50%;
+  /* Cyan/Aqua - Very visible on dark */
+  --hsl-secondary: 260, 100%, 70%;
+  /* Bright Lavender */
+  --hsl-accent: 330, 100%, 60%;
+  /* Bright Pink */
+
+  --hsl-text-main: 0, 0%, 100%;
+  /* Pure White */
+  --hsl-text-muted: 220, 20%, 75%;
+  /* Light Grey - high contrast */
+
+  --hsl-success: 150, 100%, 45%;
+  /* Bright Green */
+  --hsl-warning: 45, 100%, 50%;
+  /* Bright Amber */
+  --hsl-danger: 0, 90%, 65%;
+  /* Bright Red */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-glow: 0 0 15px hsla(var(--hsl-primary), 0.4);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: hsl(var(--hsl-bg-dark));
+  background-image: radial-gradient(circle at 10% 20%, hsla(var(--hsl-secondary), 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, hsla(var(--hsl-primary), 0.1) 0%, transparent 40%);
+  background-attachment: fixed;
+  color: hsl(var(--hsl-text-main));
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Utilities */
+.glass-panel {
+  background: hsla(var(--hsl-bg-card), 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsla(255, 100%, 100%, 0.08);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.custom-card {
+  @extend .glass-panel;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.custom-card-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--hsl-text-main));
+  margin: 0;
+}
+
+.custom-card-content {
+  flex: 1;
+}
+
+.custom-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+
+.text-gradient {
+  background: linear-gradient(135deg, hsl(var(--hsl-primary)), hsl(var(--hsl-secondary)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Flexbox Utilities */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-none {
+  flex: none;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-stretch {
+  align-items: stretch;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.gap-1 {
+  gap: 4px;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-3 {
+  gap: 12px;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+.gap-6 {
+  gap: 24px;
+}
+
+.gap-8 {
+  gap: 32px;
+}
+
+
+.btn-primary {
+  background: linear-gradient(135deg, hsl(var(--hsl-primary)), hsl(var(--hsl-secondary)));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 0 15px hsla(var(--hsl-primary), 0.5);
+}
+
+/* Angular Material Overrides (Dark Theme Integration) */
+.mat-mdc-card,
+mat-card {
+  background-color: hsla(var(--hsl-bg-card), 0.7) !important;
+  color: hsl(var(--hsl-text-main)) !important;
+}
+
+.mat-mdc-table,
+.mat-table {
+  background: transparent !important;
+}
+
+.mat-mdc-header-cell,
+.mat-header-cell {
+  color: hsl(var(--hsl-text-muted)) !important;
+}
+
+.mat-mdc-cell,
+.mat-cell {
+  color: hsl(var(--hsl-text-main)) !important;
+}
+
+/* Form Fields */
+.mat-mdc-form-field {
+  width: 100%;
+
+  .mdc-text-field {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 8px;
+    color: hsl(var(--hsl-text-main)) !important;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .mat-mdc-input-element {
+    color: hsl(var(--hsl-text-main)) !important;
+    caret-color: hsl(var(--hsl-primary)) !important;
+  }
+
+  .mat-mdc-floating-label {
+    color: hsl(var(--hsl-text-muted)) !important;
+  }
+
+  /* Outlined variants */
+  &.mat-form-field-appearance-outline {
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    &.mat-focused {
+
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: hsl(var(--hsl-primary)) !important;
+      }
+    }
+  }
+}
+
+/* Specific fix for dashboard stats text if they are not showing */
+.stat-value,
+.stat-title {
+  color: hsl(var(--hsl-text-main)) !important;
+}
+
+.stat-title {
+  color: hsl(var(--hsl-text-muted)) !important;
+}
+
+/* Selects */
+.mat-mdc-select-value {
+  color: hsl(var(--hsl-text-main)) !important;
+}
+
+.mat-mdc-select-arrow {
+  color: hsl(var(--hsl-text-muted)) !important;
+}
+
+.mat-mdc-option {
+  background: hsl(var(--hsl-bg-card)) !important;
+  color: hsl(var(--hsl-text-main)) !important;
+
+  &:hover,
+  &.mat-mdc-option-active {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+/* Datepicker */
+.mat-datepicker-content {
+  background-color: hsl(var(--hsl-bg-card)) !important;
+  color: hsl(var(--hsl-text-main)) !important;
+
+  .mat-calendar-body-cell-content {
+    color: hsl(var(--hsl-text-main)) !important;
+  }
+
+  .mat-calendar-table-header th {
+    color: hsl(var(--hsl-text-muted)) !important;
+  }
+}
+
+/* Checkboxes */
+.mat-mdc-checkbox {
+  .mdc-form-field {
+    color: hsl(var(--hsl-text-main)) !important;
+  }
+}
+
+/* Light Theme Overrides */
+/* Light Mode Overrides - Premium White */
+.light-theme {
+  /* Main Variables Swap */
+  --hsl-bg-dark: 220, 30%, 98%;
+  /* Very light blue-grey background */
+  --hsl-bg-card: 0, 0%, 100%;
+  /* White Cards */
+  --hsl-text-main: 220, 40%, 10%;
+  /* Dark Text */
+  --hsl-text-muted: 220, 20%, 40%;
+  /* Medium Grey */
+
+  background-color: hsl(var(--hsl-bg-dark)) !important;
+  background-image: none !important;
+  color: hsl(var(--hsl-text-main)) !important;
+
+  /* Lighten the panels but keep glass feel */
+  .glass-panel,
+  mat-card,
+  .mat-mdc-card {
+    background: hsla(0, 0%, 100%, 0.85) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    color: hsl(var(--hsl-text-main)) !important;
+  }
+}
+
+/* GLOBAL OVERLAYS FOR LIGHT THEME - Must be outside to ensure specificity if needed, 
+   but since .light-theme is on body, we nest here for clarity but use body selector to be safe */
+body.light-theme {
+
+  /* Force Form Fields to be Visible */
+  .mat-mdc-form-field {
+
+    /* Input Text */
+    input.mat-mdc-input-element,
+    .mat-mdc-select-value-text,
+    .mat-date-range-input-separator {
+      color: #000000 !important;
+      /* Pure Black for max contrast */
+      caret-color: #2196F3 !important;
+    }
+
+    /* Placeholders & Labels */
+    .mat-mdc-floating-label,
+    .mat-mdc-select-placeholder {
+      color: #666666 !important;
+    }
+
+    input::placeholder {
+      color: #888888 !important;
+      /* Removed opacity 1 to allow correct hiding */
+    }
+
+    /* Input Backgrounds - Keep clean for Outline style */
+    .mdc-text-field {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      /* Border removed to allow notch to work */
+    }
+
+    /* Outlines - Restore notch functionality */
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: rgba(0, 0, 0, 0.2) !important;
+    }
+
+    &.mat-focused .mdc-notched-outline__leading,
+    &.mat-focused .mdc-notched-outline__notch,
+    &.mat-focused .mdc-notched-outline__trailing {
+      border-color: #2196F3 !important;
+      border-width: 2px !important;
+    }
+  }
+
+  /* DROPDOWNS & MENUS - CRITICAL FIX */
+  .cdk-overlay-pane,
+  .mat-mdc-select-panel,
+  .mat-mdc-menu-panel,
+  .mat-datepicker-content {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Dropdown Options - NUCLEAR VISIBILITY FIX */
+  .mat-mdc-option {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Target every text container explicitly */
+  .mat-mdc-option .mdc-list-item__primary-text,
+  .mat-mdc-option .mat-mdc-option-text,
+  .mat-mdc-option span {
+    color: #000000 !important;
+  }
+
+  /* Hover/Active State */
+  .mat-mdc-option:hover,
+  .mat-mdc-option.mat-mdc-option-active,
+  .mat-mdc-option.mdc-list-item--selected {
+    background-color: #f3f4f6 !important;
+  }
+
+  /* Ensure selected text is also black or dark accent, not invisible */
+  .mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text,
+  .mat-mdc-option.mdc-list-item--selected span {
+    color: #d32f2f !important;
+    /* Keep it Red/Pink if selected so they know, but visible */
+    font-weight: 600 !important;
+  }
+
+  .mat-pseudo-checkbox {
+    color: rgba(0, 0, 0, 0.54) !important;
+  }
+
+  .mat-pseudo-checkbox-checked {
+    background-color: #d32f2f !important;
+    color: white !important;
+  }
+
+  /* DATEPICKER TEXT */
+  .mat-calendar-body-cell-content,
+  .mat-calendar-body-label {
+    color: #000000 !important;
+  }
+
+  /* ICONS */
+  .mat-icon {
+    color: #555555 !important;
+  }
+
+  .mat-datepicker-toggle .mat-icon-button {
+    color: #555555 !important;
+  }
+
+  /* MENU ITEMS - Fix Visibility */
+  .mat-mdc-menu-item {
+    color: #000000 !important;
+    background: transparent;
+  }
+
+  .mat-mdc-menu-item .mat-icon {
+    color: #555555 !important;
+  }
+
+  .mat-mdc-menu-item:hover,
+  .mat-mdc-menu-item.cdk-program-focused,
+  .mat-mdc-menu-item.cdk-keyboard-focused,
+  .mat-mdc-menu-item-highlighted {
+    background-color: #f3f4f6 !important;
+  }
+}
+
+/* Custom Form Fields replacing mat-form-field */
+.custom-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 16px;
+
+  &.full-width {
+    width: 100%;
+  }
+
+  label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: hsl(var(--hsl-text-muted));
+    margin-bottom: 4px;
+    display: block;
+  }
+}
+
+.custom-input-group {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 0 12px;
+  transition: all 0.3s ease;
+  height: 48px;
+
+  &:focus-within {
+    border-color: hsl(var(--hsl-primary));
+    box-shadow: 0 0 0 2px hsla(var(--hsl-primary), 0.2);
+  }
+
+  mat-icon {
+    color: hsl(var(--hsl-text-muted));
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input.custom-input, select.custom-select {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: hsl(var(--hsl-text-main));
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    width: 100%;
+    padding: 0;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  select.custom-select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 32px;
+    
+    option {
+      background: hsl(var(--hsl-bg-card));
+      color: hsl(var(--hsl-text-main));
+    }
+  }
+}
+
+body.light-theme {
+  .custom-input-group {
+    background-color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.2);
+    
+    &:focus-within {
+      border-color: #2196F3;
+      box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+    }
+    
+    mat-icon {
+      color: #555555;
+    }
+    
+    input.custom-input, select.custom-select {
+      color: #000000;
+      &::placeholder {
+        color: #888888;
+      }
+    }
+    select.custom-select {
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+      option {
+        background: #ffffff;
+        color: #000000;
+      }
+    }
+  }
+  .custom-form-field label {
+    color: #666666;
+  }
+}
+
+::ng-deep mat-sidenav{
+  top:64px;
+}

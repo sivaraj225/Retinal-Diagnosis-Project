@@ -1,0 +1,297 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Reduced from 12px */
+    height: calc(100vh - 130px);
+    /* Increased buffer to strictly prevent body scroll */
+    overflow: hidden;
+    padding-bottom: 0;
+}
+
+.stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-shrink: 0;
+
+    .stat-card {
+        flex: 1;
+        min-width: calc(25% - 8px);
+
+        @media (max-width: 1200px) {
+            min-width: calc(50% - 8px);
+        }
+
+        @media (max-width: 600px) {
+            min-width: 100%;
+        }
+    }
+}
+
+
+.stat-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+    /* Reduced padding */
+    height: 60px;
+    /* Further reduced from 64px */
+    box-sizing: border-box;
+
+    .stat-icon {
+        width: 30px;
+        /* Reduced */
+        height: 30px;
+        border-radius: 6px;
+        /* Slightly smaller radius */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+        mat-icon {
+            color: white;
+            font-size: 16px;
+            /* Reduced */
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .stat-content {
+        .stat-value {
+            font-size: 1rem;
+            /* Reduced */
+            font-weight: 700;
+            color: hsl(var(--hsl-text-main));
+            line-height: 1.1;
+            margin-bottom: 0;
+        }
+
+        .stat-title {
+            color: hsl(var(--hsl-text-muted));
+            font-size: 0.6rem;
+            font-weight: 500;
+        }
+    }
+}
+
+.content-grid {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+
+    .recent-scans {
+        flex: 2;
+        min-width: 0;
+    }
+
+    .charts-column {
+        flex: 1;
+        min-width: 0;
+    }
+
+    @media (max-width: 960px) {
+        flex-direction: column;
+        overflow-y: auto;
+
+        >* {
+            width: 100%;
+        }
+    }
+}
+
+
+.recent-scans {
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .custom-card-header {
+        padding: 8px 12px 0;
+        /* Reduced padding */
+        min-height: 32px;
+        /* reduced */
+
+        .custom-card-title {
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+    }
+
+    .custom-card-content {
+        flex: 1;
+        overflow: hidden;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .table-container {
+        flex: 1;
+        width: 100%;
+        overflow: auto;
+    }
+
+    table {
+        width: 100%;
+        background: transparent;
+
+        th {
+            color: hsl(var(--hsl-text-muted));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+            padding: 0 8px;
+            height: 24px;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            color: hsl(var(--hsl-text-main));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0 8px;
+            height: 24px;
+            font-size: 0.65rem;
+        }
+
+
+        /* Compact action button */
+        button[mat-icon-button] {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            line-height: 24px;
+
+            mat-icon {
+                font-size: 16px;
+                width: 16px;
+                height: 16px;
+                line-height: 16px;
+            }
+        }
+    }
+}
+
+.charts-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Reduced */
+    height: 100%;
+    min-width: 0;
+}
+
+.chart-card {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+
+    .custom-card-header {
+        padding: 4px 12px 0;
+        /* Reduced */
+        min-height: 32px;
+        margin-bottom: 0px;
+
+        .custom-card-title {
+            font-size: 0.8rem;
+        }
+    }
+
+    .custom-card-content {
+        flex: 1;
+        position: relative;
+        min-height: 0;
+        padding: 0 8px 4px;
+        /* Minimal padding */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.chart-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    canvas {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
+
+.risk-badge {
+    padding: 1px 6px;
+    border-radius: 6px;
+    font-size: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &.high {
+        background: hsla(var(--hsl-danger), 0.15);
+        color: hsl(var(--hsl-danger));
+        border: 1px solid hsla(var(--hsl-danger), 0.3);
+    }
+
+    &.moderate {
+        background: hsla(var(--hsl-warning), 0.15);
+        color: hsl(var(--hsl-warning));
+        border: 1px solid hsla(var(--hsl-warning), 0.3);
+    }
+
+    &.low {
+        background: hsla(var(--hsl-success), 0.15);
+        color: hsl(var(--hsl-success));
+        border: 1px solid hsla(var(--hsl-success), 0.3);
+    }
+}
+
+.compact-paginator {
+    background: transparent !important;
+    min-height: 32px !important;
+    height: 32px !important;
+
+    ::ng-deep .mat-mdc-paginator-container {
+        min-height: 32px !important;
+        padding: 0 8px !important;
+    }
+
+    ::ng-deep .mat-mdc-paginator-page-size {
+        display: none !important;
+    }
+
+    ::ng-deep .mat-mdc-paginator-range-label {
+        margin: 0 8px !important;
+        font-size: 0.65rem !important;
+    }
+
+    ::ng-deep .mat-mdc-icon-button {
+        width: 24px !important;
+        height: 24px !important;
+        padding: 0 !important;
+
+        .mat-mdc-button-touch-target {
+            display: none !important;
+        }
+
+        mat-icon {
+            font-size: 16px !important;
+            width: 16px !important;
+            height: 16px !important;
+        }
+    }
+}

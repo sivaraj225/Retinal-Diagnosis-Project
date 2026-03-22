@@ -1,0 +1,190 @@
+<div class="results-container">
+    <div class="images-section-full">
+        <div class="custom-card comparison-card glass-panel">
+            <div class="custom-card-header">
+                <div class="custom-card-header-content">
+                    <div class="custom-card-title">Retinal Scan Analysis</div>
+                </div>
+                <div class="">
+                    <!-- Patient Info if available -->
+                    @if (patientDetails) {
+                    <div class="patient-info-mini">
+                        <div class="patient-row"><span class="pi-label">Patient:</span> <span class="pi-value">{{
+                                patientDetails.name }}</span></div>
+                        <div class="patient-row"><span class="pi-label">ID:</span> <span class="pi-value">{{
+                                patientDetails.id }}</span></div>
+                        @if (patientDetails.gender) {
+                        <div class="patient-row"><span class="pi-label">Gender:</span> <span class="pi-value">{{
+                                patientDetails.gender }}</span></div>
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="scan-analysis-layout">
+                <!-- Left: Uploaded Image -->
+                <div class="scan-image-panel">
+                    <h4 class="panel-label">Uploaded Retinal Fundus Image</h4>
+                    <div class="image-frame">
+                        <img [src]="originalImage" alt="Uploaded Retinal Scan" class="retinal-image"
+                            [style.filter]="filterStyle">
+                    </div>
+                </div>
+                <div class="risk-list-container">
+                    <div class="risk-container1">
+                        <h4 class="panel-label">AI Prediction Summary</h4>
+                        @if (risks.length > 0) {
+                        <div class="top-disease-banner">
+                            <div class="value-risk">
+                                <div class="top-disease-name">{{ risks[0].code || '' }} {{ risks[0].fullName || risks[0].name }}
+                                </div>
+                                <div class="top-disease-pct">{{ risks[0].score }}%</div>
+                                <div class="top-disease-level" [class]="getClass(risks[0].score)">{{ risks[0].level }}</div>
+                            </div>
+                            @if (risks[0].description) {
+                            <p class="top-disease-desc">{{ risks[0].description }}</p>
+                            }
+                        </div>
+                        }
+                    </div>
+                    <div class="risk-div-container">
+                        <!-- Filter Controls -->
+                        <div class="filter-controls">
+                            <span class="filter-label">Image Filter</span>
+                            <button mat-stroked-button [class.active-filter]="currentFilter === 'none'"
+                                (click)="setFilter('none')" size="small" class="filter-btn">Normal</button>
+                            <button mat-stroked-button [class.active-filter]="currentFilter === 'red-free'"
+                                (click)="setFilter('red-free')" size="small" class="filter-btn">Red-Free</button>
+                            <button mat-stroked-button [class.active-filter]="currentFilter === 'invert'"
+                                (click)="setFilter('invert')" size="small" class="filter-btn">Invert</button>
+                            <button mat-stroked-button [class.active-filter]="currentFilter === 'contrast'"
+                                (click)="setFilter('contrast')" size="small" class="filter-btn" >Contrast</button>
+                        </div>
+                        <div class="risk-container2">
+                            <div class="risk-list-header">
+                                <h4 class="panel-label">Disease Probability & Severity</h4>
+                                <button mat-stroked-button color="primary" (click)="downloadReport()" class="download-btn">Download Report</button>
+                            </div>
+                            <div class="risk-list">
+                                @for (risk of risks; track risk.name) {
+                                <div class="risk-item">
+                                    <div class="risk-header">
+                                        <span class="risk-name">{{risk.name}}</span>
+                                        <span class="risk-score" [class]="getClass(risk.score)">{{risk.score}}%</span>
+                                    </div>
+                                    <mat-progress-bar mode="determinate" [value]="risk.score"
+                                        [color]="getScoreColor(risk.score)"></mat-progress-bar>
+                                    <span class="risk-level" [class]="getClass(risk.score)">{{risk.level}}</span>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="analysis-section"> -->
+        <!-- <div class="custom-card risks-card glass-panel">
+            <div class="custom-card-header">
+                <div class="custom-card-title">Disease Probability & Severity</div>
+            </div>
+            <div class="custom-card-content"> -->
+                <!-- Probability Graph -->
+                <!-- <div class="probability-graph-container">
+                    <div class="graph-bars">
+                        @for (risk of risks; track risk.name) {
+                        <div class="bar-group">
+                            <div class="bar-wrapper">
+                                <div class="bar-fill" [style.height.%]="risk.score" [class]="getClass(risk.score)">
+                                    <span class="bar-tooltip">{{risk.score}}%</span>
+                                </div>
+                            </div>
+                            <span class="bar-label">{{risk.name}}</span>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="risk-list">
+                    @for (risk of risks; track risk.name) {
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <span class="risk-name">{{risk.name}}</span>
+                            <span class="risk-score" [class]="getClass(risk.score)">{{risk.score}}%</span>
+                        </div>
+                        <mat-progress-bar mode="determinate" [value]="risk.score"
+                            [color]="getScoreColor(risk.score)"></mat-progress-bar>
+                        <span class="risk-level" [class]="getClass(risk.score)">{{risk.level}}</span>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div class="custom-card-actions align-end" style="padding: 16px 24px;">
+                <button mat-stroked-button color="primary" (click)="downloadReport()">Download Report</button>
+                <button mat-raised-button color="primary">Verify Results</button>
+            </div>
+        </div> -->
+
+        <!-- Patient Trend Chart -->
+        <!-- <div class="custom-card trend-card glass-panel" style="margin-top: 24px;">
+
+            <div class="custom-card-header">
+                <div class="custom-card-title">Patient Health Timeline</div>
+                <div class="custom-card-subtitle" style="color: hsl(var(--hsl-text-muted))">Risk Score Progression (6
+                    Months)</div>
+            </div>
+            <div class="custom-card-content chart-container"
+                style="height: 300px; position: relative; margin-top: 16px;">
+                <canvas baseChart [data]="trendChartData" [options]="trendChartOptions" [type]="'line'">
+                </canvas>
+            </div>
+        </div>
+
+        <div class="custom-card explanation-card glass-panel" style="margin-top: 24px;">
+            <div class="custom-card-header">
+                <div class="custom-card-title">Explainable AI (SHAP & LIME)</div>
+                <div class="custom-card-subtitle" style="color: hsl(var(--hsl-text-muted))">Feature Contribution
+                    Analysis</div>
+            </div>
+            <div class="custom-card-content">
+                <p class="summary-text">{{explanation}}</p>
+
+                <div class="shap-container">
+                    <div class="shap-legend">
+                        <span class="legend-item"><span class="dot positive"></span> Increases Risk</span>
+                        <span class="legend-item"><span class="dot negative"></span> Decreases Risk</span>
+                    </div>
+
+                    <div class="shap-chart">
+                        @for (feature of shapValues; track feature.feature) {
+                        <div class="shap-row">
+                            <div class="feature-label">{{feature.feature}}</div>
+                            <div class="bar-container">
+                                <div class="center-line"></div>
+
+                                @if (feature.value > 0) {
+
+                                <div class="shap-bar positive" [style.width.%]="feature.value * 100"
+                                    [style.left.%]="50">
+                                </div>
+                                <div class="value-label right">+{{feature.value | number:'1.2-2'}}</div>
+                                } @else {
+                                <div class="shap-bar negative" [style.width.%]="(feature.value * -100)"
+                                    [style.right.%]="50"></div>
+                                <div class="value-label left">{{feature.value | number:'1.2-2'}}</div>
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

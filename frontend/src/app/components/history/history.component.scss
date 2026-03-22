@@ -1,0 +1,171 @@
+.history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.header-with-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 16px;
+
+    .custom-card-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 1.60rem;
+    }
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.search-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .filter-options {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    /* Compact Form Fields */
+    .custom-form-field {
+        width: 190px;
+        margin-bottom: 0;
+
+        .custom-input-group {
+            height: 40px;
+        }
+    }
+
+}
+
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 8px;
+
+    table {
+        width: 100%;
+        background: transparent;
+
+        th {
+            color: hsl(var(--hsl-text-muted));
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 16px !important;
+        }
+
+        td {
+            color: hsl(var(--hsl-text-main));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            padding: 6px 16px !important;
+        }
+
+        tr.mat-row:hover, tr.mat-mdc-row:hover {
+            background-color: hsla(var(--hsl-primary), 0.05);
+        }
+    }
+}
+
+// Force table to be compact by whatever means
+::ng-deep {
+    .table-responsive {
+        .mat-mdc-row, .mat-mdc-header-row, .mat-row, .mat-header-row {
+            height: 38px !important;
+            min-height: 38px !important;
+        }
+        
+        .mat-mdc-cell, .mat-mdc-header-cell, td.mat-cell, th.mat-header-cell {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        // Adjust icon button in table to fit smaller row height
+        .mat-mdc-icon-button {
+            height: 32px !important;
+            width: 32px !important;
+            padding: 4px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            
+            .mat-icon {
+                font-size: 20px !important;
+                height: 20px !important;
+                width: 20px !important;
+            }
+        }
+    }
+}
+
+.confidence-badge {
+    font-weight: 700;
+    color: hsl(var(--hsl-warning));
+    // Default low/med confidence color
+
+    &.high {
+        color: hsl(var(--hsl-success));
+    }
+}
+
+.status-chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    // Default fallback
+    background: hsla(var(--hsl-text-muted), 0.1);
+    color: hsl(var(--hsl-text-main));
+    border: 1px solid hsla(var(--hsl-text-muted), 0.3);
+
+    &.reviewed {
+        background: hsla(var(--hsl-success), 0.15);
+        color: hsl(var(--hsl-success));
+        border: 1px solid hsla(var(--hsl-success), 0.3);
+    }
+
+    &.pending {
+        background: hsla(var(--hsl-warning), 0.15);
+        color: hsl(var(--hsl-warning));
+        border: 1px solid hsla(var(--hsl-warning), 0.3);
+    }
+
+    &.auto-cleared {
+        background: hsla(var(--hsl-primary), 0.15);
+        color: hsl(var(--hsl-primary));
+        border: 1px solid hsla(var(--hsl-primary), 0.3);
+    }
+
+    &.rejected {
+        background: hsla(var(--hsl-danger), 0.15);
+        color: hsl(var(--hsl-danger));
+        border: 1px solid hsla(var(--hsl-danger), 0.3);
+    }
+}
+
+// Paginator overrides
+::ng-deep .mat-mdc-paginator {
+    background: transparent !important;
+    color: hsl(var(--hsl-text-muted)) !important;
+}
+
+::ng-deep mat-icon {
+    &.search-text {
+        padding-top: 7px;
+    }
+}

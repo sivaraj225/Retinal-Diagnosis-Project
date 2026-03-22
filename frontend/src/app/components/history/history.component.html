@@ -1,0 +1,86 @@
+<div class="history-container">
+    <div class="custom-card glass-panel">
+        <div class="custom-card-header header-with-search">
+            
+            <div class="search-controls">
+                <!-- Date Filter -->
+                <div class="custom-card-title">Patient Diagnostic History</div>
+                <div class="filter-options">
+                    <!-- Date Filter -->
+                    <div class="custom-form-field">
+                        <div class="custom-input-group">
+                            <input class="custom-input" type="date" (change)="applyDateFilter($event)" placeholder="Select Date">
+                        </div>
+                    </div>
+                
+
+                    <!-- Text Filter -->
+                    <div class="custom-form-field">
+                        <div class="custom-input-group">
+                            <mat-icon>search</mat-icon>
+                            <input class="custom-input" (keyup)="applyFilter($event)" placeholder="Search...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-card-content">
+            <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient ID </th>
+                        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                    </ng-container>
+
+                    <!-- Date Column -->
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                        <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                    </ng-container>
+
+                    <!-- Condition Column -->
+                    <ng-container matColumnDef="condition">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Condition </th>
+                        <td mat-cell *matCellDef="let row"> {{row.condition}} </td>
+                    </ng-container>
+
+                    <!-- Confidence Column -->
+                    <ng-container matColumnDef="confidence">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Confidence </th>
+                        <td mat-cell *matCellDef="let row">
+                            <span class="confidence-badge" [class.high]="row.confidence > 80">{{row.confidence}}%</span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="viewReport(row)">
+                                    <mat-icon>visibility</mat-icon>
+                                    <span>View Report</span>
+                                </button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSize]="10" hidePageSize showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
