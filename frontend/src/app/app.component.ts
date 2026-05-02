@@ -34,12 +34,12 @@ export class AppComponent {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result: any) => result.matches),
       shareReplay()
     );
 
   constructor() {
-    this.themeService.isDark$.subscribe(val => {
+    this.themeService.isDark$.subscribe((val: boolean) => {
       this.isDark = val;
     });
   }

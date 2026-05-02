@@ -30,7 +30,7 @@ export class AuthService {
 
   login(email: string, pass: string): Observable<any> {
     return this.http.post<any>(`${this.BACKEND_URL}/api/login`, { email, password: pass }).pipe(
-      tap(res => {
+      tap((res: any) => {
         if (res.user) {
           this.setSession(res.user);
         }
@@ -40,7 +40,7 @@ export class AuthService {
 
   signup(name: string, email: string, pass: string): Observable<any> {
     return this.http.post<any>(`${this.BACKEND_URL}/api/signup`, { name, email, password: pass }).pipe(
-      tap(res => {
+      tap((res: any) => {
         if (res.user) {
           this.setSession(res.user);
         }

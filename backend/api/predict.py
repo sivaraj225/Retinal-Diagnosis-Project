@@ -84,6 +84,53 @@ def convert_to_binary_matrix(pil_image: Image.Image) -> list:
     return binary_arr.tolist()
 
 
+def is_retinal_image(pil_image: Image.Image) -> bool:
+    """
+    Heuristic check to see if an image is a retinal fundus image.
+    Checks for:
+    1. Red-dominant color distribution (Orange/Red spectrum)
+    2. Minimum variance (to avoid solid colors)
+    3. Brightness range typical of fundus scans
+    """
+    # Convert to RGB and resize for fast processing
+    img = pil_image.convert("RGB")
+    img = img.resize((100, 100))
+    arr = np.array(img)
+    
+    # 1. Check for typical retinal colors (Red channel should be strongest)
+    avg_color = np.mean(arr, axis=(0, 1))
+    r, g, b = avg_color
+    
+    # 2. Check for variance (to avoid solid colors or noise)
+    std_dev = np.std(arr)
+    
+    # 3. Check for dark corners (circular mask - common in fundus images)
+    corners = [
+        arr[0:10, 0:10], arr[0:10, 90:100],
+        arr[90:100, 0:10], arr[90:100, 90:100]
+    ]
+    corner_avg = np.mean([np.mean(c) for c in corners])
+
+    # Debug print
+    print(f"[INFO] Validation: R={r:.1f}, G={g:.1f}, B={b:.1f}, Std={std_dev:.1f}, CornerAvg={corner_avg:.1f}")
+
+    # Heuristic Thresholds:
+    # - R should be the dominant channel (R > G and R > B)
+    # - R should be at least 1.2x of B
+    # - Std Dev > 15 (ensures it's not a flat image)
+    # - CornerAvg is often low in fundus images, but we don't strictly require it 
+    #   in case the image is cropped.
+    
+    is_red_dominant = r > g * 0.9 and r > b * 1.2
+    is_bright_enough = r > 40
+    is_not_flat = std_dev > 15
+    
+    # Most retinal images pass these checks.
+    # Non-retinal images (faces, landscapes) usually have more balanced R/G/B 
+    # or different dominance.
+    return is_red_dominant and is_bright_enough and is_not_flat
+
+
 def build_explanation(sorted_results: list) -> str:
     """Build a human-readable explanation from the prediction results."""
     top_disease, top_prob = sorted_results[0]
@@ -132,6 +179,14 @@ def predict():
         img_bytes = file.read()
         pil_image = Image.open(io.BytesIO(img_bytes))
         
+        # Validate if it's a retinal image
+        if not is_retinal_image(pil_image):
+            print(f"[WARNING] Invalid image rejected: {file.filename}")
+            return jsonify({
+                "error": "Invalid image detected. Please upload a valid retinal fundus scan image.",
+                "details": "The image provided does not match the expected color and pattern profile of a retinal scan."
+            }), 400
+
         # Preprocess for model
         img_array = preprocess_image(pil_image)
         

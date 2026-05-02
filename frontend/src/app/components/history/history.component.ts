@@ -64,18 +64,22 @@ const BACKEND_URL = 'http://127.0.0.1:5000';
                 </div>
                 <div class="risks-list">
                     <h4>All Conditions Probabilities</h4>
-                    <div class="risk-item" *ngFor="let risk of data.risks">
+                    @for (risk of data.risks; track risk.name) {
+                    <div class="risk-item">
                         <div class="risk-info">
                             <span class="risk-name">{{risk.name}}</span>
                             <span class="risk-score" [class]="getClass(risk.probability)">{{risk.probability}}%</span>
                         </div>
                         <mat-progress-bar mode="determinate" [value]="risk.probability" [color]="getScoreColor(risk.probability)"></mat-progress-bar>
                     </div>
+                    }
                 </div>
-                <div class="explanation-box" *ngIf="data.explanation">
+                @if (data.explanation) {
+                <div class="explanation-box">
                     <h4>Clinical Insight</h4>
                     <p>{{data.explanation}}</p>
                 </div>
+                }
             </div>
         </div>
     </mat-dialog-content>
@@ -128,7 +132,7 @@ export class ReportDialogComponent {
     if (!this.data._id) return;
     const url = `${BACKEND_URL}/api/report/${this.data._id}`;
     this.http.get(url, { responseType: 'blob' }).subscribe({
-      next: (blob) => {
+      next: (blob: any) => {
         const a = document.createElement('a');
         const objectUrl = URL.createObjectURL(blob);
         a.href = objectUrl;
@@ -136,7 +140,7 @@ export class ReportDialogComponent {
         a.click();
         URL.revokeObjectURL(objectUrl);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Download failed', err);
         alert('Failed to download report. Please try again.');
       }
@@ -191,8 +195,8 @@ export class HistoryComponent implements AfterViewInit {
     }
     
     this.http.get<any[]>(url).subscribe({
-      next: (data) => {
-        const records: PatientRecord[] = data.map(r => ({
+      next: (data: any[]) => {
+        const records: PatientRecord[] = data.map((r: any) => ({
           id: r.patient_id,
           name: r.patient_name,
           date: r.date,
@@ -205,7 +209,7 @@ export class HistoryComponent implements AfterViewInit {
         }));
         this.dataSource.data = records;
       },
-      error: (err) => { console.error('Failed to fetch history', err); }
+      error: (err: any) => { console.error('Failed to fetch history', err); }
     });
   }
 
@@ -237,7 +241,7 @@ export class HistoryComponent implements AfterViewInit {
     if (!record._id) return;
     const url = `${BACKEND_URL}/api/report/${record._id}`;
     this.http.get(url, { responseType: 'blob' }).subscribe({
-      next: (blob) => {
+      next: (blob: any) => {
         const a = document.createElement('a');
         const objectUrl = URL.createObjectURL(blob);
         a.href = objectUrl;
@@ -245,7 +249,7 @@ export class HistoryComponent implements AfterViewInit {
         a.click();
         URL.revokeObjectURL(objectUrl);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Download failed', err);
         alert('Failed to download report. Please try again.');
       }

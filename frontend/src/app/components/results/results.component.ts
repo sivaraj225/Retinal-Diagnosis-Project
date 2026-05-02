@@ -8,7 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions, Chart, registerables } from 'chart.js';
 
 interface RiskFactor {
@@ -24,16 +24,12 @@ interface RiskFactor {
 @Component({
   selector: 'app-results',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatProgressBarModule, MatIconModule, MatTabsModule, MatTooltipModule, NgChartsModule],
+  imports: [CommonModule, MatButtonModule, MatProgressBarModule, MatIconModule, MatTabsModule, MatTooltipModule, BaseChartDirective],
   templateUrl: './results.component.html',
   styleUrl: './results.component.scss'
 })
 export class ResultsComponent implements OnInit {
   private router = inject(Router);
-
-  constructor() {
-    Chart.register(...registerables);
-  }
 
   // Filter State
   currentFilter = 'none';

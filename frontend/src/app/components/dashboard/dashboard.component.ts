@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
 import { ReportDialogComponent, PatientRecord } from '../history/history.component';
 import { AuthService } from '../../services/auth.service';
@@ -29,7 +29,7 @@ interface PatientScan extends PatientRecord {
     MatPaginatorModule,
     MatMenuModule,
     MatDialogModule,
-    NgChartsModule
+    BaseChartDirective
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     const authQuery = doctorId ? `?doctor_id=${doctorId}` : '';
 
     this.http.get<any>(`http://127.0.0.1:5000/api/stats${authQuery}`).subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.stats = [
           { ...this.stats[0], value: data.total_scans?.toLocaleString() || '0' },
           { ...this.stats[1], value: data.high_risk_cases?.toString() || '0' },
@@ -152,7 +152,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           };
         }
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Failed to fetch dashboard stats', err);
         this.stats = [
           { ...this.stats[0], value: '0' },
@@ -164,8 +164,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
 
     this.http.get<any[]>(`http://127.0.0.1:5000/api/history${authQuery}`).subscribe({
-      next: (data) => {
-        this.allScans = data.map(record => ({
+      next: (data: any[]) => {
+        this.allScans = data.map((record: any) => ({
           id: record.patient_id,
           name: record.patient_name,
           date: record.date,
@@ -179,7 +179,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         }));
         this.filterRecentScans();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Failed to fetch history for dashboard', err);
       }
     });

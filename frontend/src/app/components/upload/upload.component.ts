@@ -147,7 +147,7 @@ export class UploadComponent implements OnInit {
     }
 
     this.http.post<any>(`${BACKEND_URL}/predict`, formData).subscribe({
-      next: (response) => {
+      next: (response: any) => {
         this.isUploading = false;
         this.analysisComplete = true;
 
@@ -163,10 +163,15 @@ export class UploadComponent implements OnInit {
 
         this.navigateToResults();
       },
-      error: (err) => {
+      error: (err: any) => {
         this.isUploading = false;
         const serverError = err.error?.error || err.message || 'Unknown error';
-        this.uploadError = `Analysis failed: ${serverError}. Please ensure the backend server is running.`;
+        
+        if (err.status === 400) {
+          this.uploadError = serverError;
+        } else {
+          this.uploadError = `Analysis failed: ${serverError}. Please ensure the backend server is running.`;
+        }
         console.error('Prediction API error:', err);
       }
     });
